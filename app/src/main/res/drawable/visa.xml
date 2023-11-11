@@ -8,7 +8,7 @@
         android:pathData="M0,0h51v40h-51z"/>
     <path
         android:pathData="M43,0H8C3.582,0 0,3.582 0,8V32C0,36.418 3.582,40 8,40H43C47.418,40 51,36.418 51,32V8C51,3.582 47.418,0 43,0Z"
-        android:fillColor="#FDF1DE"/>
+        android:fillColor="#FFFFFF"/>
     <group>
       <clip-path
           android:pathData="M46,14H4V26H46V14Z"/>

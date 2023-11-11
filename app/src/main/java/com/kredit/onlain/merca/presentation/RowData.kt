@@ -37,7 +37,7 @@ fun RowData(
         Text(
             color = baseText,
             fontStyle = FontStyle(R.font.baloo2),
-            fontSize = 18.sp,
+            fontSize = 16.sp,
             fontWeight = FontWeight(400),
             text = title,
             textAlign = TextAlign.Start
@@ -45,7 +45,7 @@ fun RowData(
         Text(
             color = baseText,
             fontStyle = FontStyle(R.font.baloo2),
-            fontSize = 18.sp,
+            fontSize = 16.sp,
             fontWeight = FontWeight(600),
             text = content,
             textAlign = TextAlign.End
