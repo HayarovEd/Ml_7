@@ -11,4 +11,5 @@
     <string name="amount">Amount:</string>
     <string name="bet">Rate:</string>
     <string name="term">Term:</string>
+    <string name="checkout">Apply</string>
 </resources>

@@ -25,7 +25,7 @@ android {
 
     signingConfigs {
         getByName("debug") {
-            storeFile = file("ID521.keystore")
+            storeFile = file("ID524.keystore")
             keyAlias = "mypass"
             storePassword = "com.kredit.onlain.merca"
             keyPassword = "com.kredit.onlain.merca"
@@ -33,7 +33,7 @@ android {
         create("release") {
             keyAlias = "mypass"
             keyPassword = "com.kredit.onlain.merca"
-            storeFile = file("ID521.keystore")
+            storeFile = file("ID524.keystore")
             storePassword = "com.kredit.onlain.merca"
             enableV2Signing = true
         }

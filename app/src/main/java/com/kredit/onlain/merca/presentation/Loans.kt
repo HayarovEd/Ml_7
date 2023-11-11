@@ -1,5 +1,5 @@
 
-package org.zaim.na.kartu.polus.presentation
+package com.kredit.onlain.merca.presentation
 
 import android.annotation.SuppressLint
 import androidx.compose.foundation.background
@@ -17,7 +17,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.kredit.onlain.merca.domain.model.basedto.BaseState
 import com.kredit.onlain.merca.domain.model.basedto.Loan
-import org.zaim.na.kartu.polus.ui.theme.baseBackground
+import com.kredit.onlain.merca.ui.theme.baseBackground
+import org.zaim.na.kartu.polus.presentation.MainEvent
 
 @SuppressLint("CoroutineCreationDuringComposition")
 @Composable

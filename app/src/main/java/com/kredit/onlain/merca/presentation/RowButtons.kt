@@ -1,5 +1,5 @@
 
-package org.zaim.na.kartu.polus.presentation
+package com.kredit.onlain.merca.presentation
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -19,19 +19,22 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import org.zaim.na.kartu.polus.R
+import com.kredit.onlain.merca.R
 import com.kredit.onlain.merca.domain.model.ElementOffer
-import com.kredit.onlain.merca.domain.model.StatusApplication
+import com.kredit.onlain.merca.domain.model.StatusApplication.Offer
 import com.kredit.onlain.merca.domain.model.basedto.BaseState
-import org.zaim.na.kartu.polus.ui.theme.baseBackground
-import org.zaim.na.kartu.polus.ui.theme.darkText
-import org.zaim.na.kartu.polus.ui.theme.yellow
+import com.kredit.onlain.merca.ui.theme.blue
+import com.kredit.onlain.merca.ui.theme.white
+import org.zaim.na.kartu.polus.presentation.MainEvent
+import org.zaim.na.kartu.polus.presentation.MainEvent.OnChangeStatusApplication
+import org.zaim.na.kartu.polus.presentation.MainEvent.OnGoToWeb
 
 @Composable
 fun RowButtons(
@@ -64,13 +67,13 @@ fun RowButtons(
         Box(
             modifier = modifier
                 .weight(1f)
-                .border(width = 3.dp, color = yellow, shape = RoundedCornerShape(10.dp))
+                .border(width = 2.dp, color = blue, shape = RoundedCornerShape(10.dp))
                 .clip(shape = RoundedCornerShape(10.dp))
-                .background(color = baseBackground)
+                .background(color = white)
                 .clickable(onClick = {
                     onEvent(
-                        MainEvent.OnChangeStatusApplication(
-                            StatusApplication.Offer(
+                        OnChangeStatusApplication(
+                            Offer(
                                 currentBaseState = currentBaseState,
                                 ElementOffer(
                                     name = name,
@@ -95,12 +98,12 @@ fun RowButtons(
                         )
                     )
                 })
-                .padding(vertical = 6.dp)
+                .padding(vertical = 16.dp)
         ) {
             Icon(
                 modifier = modifier.align(alignment = Alignment.Center),
-                imageVector = ImageVector.vectorResource(id = R.drawable.carbon_overflow),
-                tint = yellow,
+                imageVector = ImageVector.vectorResource(id = R.drawable.baseline_more_vert_24),
+                tint = blue,
                 contentDescription = ""
             )
         }
@@ -109,24 +112,24 @@ fun RowButtons(
             modifier = modifier
                 .weight(3f)
                 .clip(shape = RoundedCornerShape(10.dp))
-                .background(color = yellow)
+                .background(color = blue)
                 .clickable(onClick = {
                     onEvent(
-                        MainEvent.OnGoToWeb(
+                        OnGoToWeb(
                             urlOffer = order,
                             nameOffer = name
                         )
                     )
                 })
-                .padding(vertical = 8.dp)
+                .padding(vertical = 16.dp)
         ) {
             Text(
                 modifier = modifier.align(alignment = Alignment.Center),
-                color = darkText,
-                fontStyle = FontStyle(R.font.open_sans),
-                fontSize = 20.sp,
+                color = white,
+                fontStyle = FontStyle(R.font.baloo2),
+                fontSize = 22.sp,
                 fontWeight = FontWeight(600),
-                text = titleOffer,
+                text = stringResource(id = R.string.checkout),
                 textAlign = TextAlign.Center
             )
         }

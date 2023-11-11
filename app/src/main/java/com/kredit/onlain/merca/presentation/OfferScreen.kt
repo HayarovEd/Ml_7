@@ -1,4 +1,4 @@
-package org.zaim.na.kartu.polus.presentation
+package com.kredit.onlain.merca.presentation
 
 import android.annotation.SuppressLint
 import android.widget.TextView
@@ -43,16 +43,18 @@ import androidx.compose.ui.unit.sp
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.core.text.HtmlCompat
 import coil.compose.AsyncImage
-import org.zaim.na.kartu.polus.R
+import com.kredit.onlain.merca.R
 import com.kredit.onlain.merca.data.VALUE_ONE
 import com.kredit.onlain.merca.domain.model.ElementOffer
-import com.kredit.onlain.merca.domain.model.StatusApplication
+import com.kredit.onlain.merca.domain.model.StatusApplication.Connect
 import com.kredit.onlain.merca.domain.model.basedto.BaseState
-import org.zaim.na.kartu.polus.ui.theme.baseBackground
-import org.zaim.na.kartu.polus.ui.theme.darkText
-import org.zaim.na.kartu.polus.ui.theme.grey
-import org.zaim.na.kartu.polus.ui.theme.white
-import org.zaim.na.kartu.polus.ui.theme.yellow
+import com.kredit.onlain.merca.ui.theme.baseBackground
+import com.kredit.onlain.merca.ui.theme.baseText
+import com.kredit.onlain.merca.ui.theme.blue
+import com.kredit.onlain.merca.ui.theme.white
+import org.zaim.na.kartu.polus.presentation.MainEvent
+import org.zaim.na.kartu.polus.presentation.MainEvent.OnChangeStatusApplication
+import org.zaim.na.kartu.polus.presentation.MainEvent.OnGoToWeb
 
 @SuppressLint("ResourceAsColor")
 @OptIn(ExperimentalMaterial3Api::class)
@@ -79,23 +81,23 @@ fun OfferScreen(
                     ) {
                         IconButton(onClick = {
                             onEvent(
-                                MainEvent.OnChangeStatusApplication(
-                                    StatusApplication.Connect(baseState)
+                                OnChangeStatusApplication(
+                                    Connect(baseState)
                                 )
                             )
                         }) {
                             Icon(
-                                imageVector = ImageVector.vectorResource(id = R.drawable.baseline_arrow_back_30),
-                                tint = white,
+                                imageVector = ImageVector.vectorResource(id = R.drawable.baseline_keyboard_arrow_left_20),
+                                tint = blue,
                                 contentDescription = ""
                             )
                         }
-                        Spacer(modifier = modifier.width(16.dp))
+                        Spacer(modifier = modifier.width(15.dp))
                         Text(
-                            color = white,
-                            fontStyle = FontStyle(R.font.open_sans),
+                            color = baseText,
+                            fontStyle = FontStyle(R.font.baloo2),
                             fontSize = 22.sp,
-                            fontWeight = FontWeight(600),
+                            fontWeight = FontWeight(500),
                             text = elementOffer.name
                         )
                     }
@@ -110,19 +112,17 @@ fun OfferScreen(
                     modifier = modifier
                         .fillMaxWidth()
                         .padding(horizontal = 24.dp),
-                    shape = RoundedCornerShape(10.dp),
+                    shape = RoundedCornerShape(15.dp),
                     contentPadding = PaddingValues(
-                        vertical = 7.dp
+                        vertical = 16.dp
                     ),
                     colors = ButtonDefaults.buttonColors(
-                        containerColor = yellow,
-                        contentColor = darkText,
-                        disabledContainerColor = grey,
-                        disabledContentColor = white
+                        containerColor = blue,
+                        contentColor = white,
                     ),
                     onClick = {
                         onEvent(
-                            MainEvent.OnGoToWeb(
+                            OnGoToWeb(
                                 urlOffer = elementOffer.order,
                                 nameOffer = elementOffer.name
                             )
@@ -132,12 +132,13 @@ fun OfferScreen(
                     Text(
                         text = stringResource(id = R.string.checkout),
                         style = TextStyle(
-                            fontSize = 18.sp,
-                            fontFamily = FontFamily(Font(R.font.open_sans)),
+                            fontSize = 26.sp,
+                            fontFamily = FontFamily(Font(R.font.baloo2)),
                             fontWeight = FontWeight(600),
                         )
                     )
                 }
+                Spacer(modifier = modifier.height(24.dp))
             }
         }
     ) { paddingValues ->
@@ -146,7 +147,7 @@ fun OfferScreen(
                 .padding(paddingValues)
                 .fillMaxSize()
                 .background(color = baseBackground)
-                .padding(horizontal = 24.dp)
+                .padding(horizontal = 20.dp)
                 .verticalScroll(rememberScrollState()),
         ) {
             AsyncImage(
@@ -156,7 +157,21 @@ fun OfferScreen(
                 contentScale = ContentScale.FillWidth,
                 contentDescription = ""
             )
-            Spacer(modifier = modifier.height(32.dp))
+            Spacer(modifier = modifier.height(20.dp))
+            AndroidView(
+                modifier = modifier
+                    .fillMaxWidth()
+                    .background(color = white),
+                factory = { context -> TextView(context) },
+                update = {
+                    it.setTextColor(R.color.white)
+                    it.text = HtmlCompat.fromHtml(
+                        elementOffer.description,
+                        HtmlCompat.FROM_HTML_MODE_COMPACT
+                    )
+                }
+            )
+            Spacer(modifier = modifier.height(31.dp))
             RowData(
                 title = stringResource(id = R.string.amount),
                 content = elementOffer.amount
@@ -183,23 +198,6 @@ fun OfferScreen(
                 showMir = elementOffer.showMir,
                 showQivi = elementOffer.showQiwi,
                 showCache = elementOffer.showCache
-            )
-            Spacer(modifier = modifier.height(24.dp))
-
-            AndroidView(
-                modifier = modifier
-                    .fillMaxWidth()
-                    .clip(shape= RoundedCornerShape(5.dp))
-                    .background(color = white)
-                    .padding(5.dp),
-                factory = { context -> TextView(context) },
-                update = {
-                    it.setTextColor(R.color.white)
-                    it.text = HtmlCompat.fromHtml(
-                        elementOffer.description,
-                        HtmlCompat.FROM_HTML_MODE_COMPACT
-                    )
-                }
             )
         }
     }

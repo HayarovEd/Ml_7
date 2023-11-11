@@ -59,7 +59,7 @@ class MainViewModel @Inject constructor(
     private var _state = MutableStateFlow(MainState())
     val state = _state.asStateFlow()
 
-    private var _lastState = MutableStateFlow<StatusApplication>(StatusApplication.Splash)
+    private var _lastState = MutableStateFlow<StatusApplication>(Loading)
     private val _myTracker = MutableStateFlow("")
     private val _appsFlayer = MutableStateFlow("")
     private val _link = MutableStateFlow("")
@@ -152,7 +152,7 @@ class MainViewModel @Inject constructor(
             loadDbData()
         } else {
             _state.value.copy(
-                statusApplication = StatusApplication.NoConnect
+                statusApplication = NoConnect
             )
                 .updateStateUI()
         }
@@ -168,7 +168,7 @@ class MainViewModel @Inject constructor(
         when (mainEvent) {
             Reconnect -> {
                 if (service.checkedInternetConnection()) {
-                    if (_lastState.value !is StatusApplication.Loading) {
+                    if (_lastState.value !is Loading) {
                         _state.value.copy(
                             statusApplication = _lastState.value
                         )
@@ -178,7 +178,7 @@ class MainViewModel @Inject constructor(
                     }
                 } else {
                     _state.value.copy(
-                        statusApplication = StatusApplication.NoConnect,
+                        statusApplication = NoConnect,
                     )
                         .updateStateUI()
                 }
@@ -186,7 +186,7 @@ class MainViewModel @Inject constructor(
 
             is OnChangeBaseState -> {
                 _state.value.copy(
-                    statusApplication = StatusApplication.Connect(mainEvent.baseState),
+                    statusApplication = Connect(mainEvent.baseState),
                 )
                     .updateStateUI()
             }
@@ -201,7 +201,7 @@ class MainViewModel @Inject constructor(
             is OnGoToWeb -> {
                 _lastState.value = _state.value.statusApplication
                 _state.value.copy(
-                    statusApplication = StatusApplication.Loading,
+                    statusApplication = Loading,
                 )
                     .updateStateUI()
                 if (service.checkedInternetConnection()) {
@@ -248,7 +248,7 @@ class MainViewModel @Inject constructor(
                     }
                 } else {
                     _state.value.copy(
-                        statusApplication = StatusApplication.NoConnect,
+                        statusApplication = NoConnect,
                     )
                         .updateStateUI()
                 }
@@ -458,7 +458,7 @@ class MainViewModel @Inject constructor(
 
                     //Log.d("ASDFGH", "db data ${db.data}")
                     if (_link.value.isBlank()||_link.value==" ") {
-                        val statusApplication = StatusApplication.Connect(BaseState.Loans)
+                        val statusApplication = Connect(BaseState.Loans)
                         _state.value.copy(
                             statusApplication = statusApplication,
                             dbData = db.data,

@@ -1,8 +1,7 @@
 
-package org.zaim.na.kartu.polus.presentation
+package com.kredit.onlain.merca.presentation
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -14,6 +13,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontStyle
@@ -21,15 +21,18 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
-import org.zaim.na.kartu.polus.R
+import com.kredit.onlain.merca.R
+import com.kredit.onlain.merca.R.string
 import com.kredit.onlain.merca.data.VALUE_ONE
 import com.kredit.onlain.merca.domain.model.ElementOffer
-import com.kredit.onlain.merca.domain.model.StatusApplication
+import com.kredit.onlain.merca.domain.model.StatusApplication.Offer
 import com.kredit.onlain.merca.domain.model.basedto.BaseState
 import com.kredit.onlain.merca.domain.model.basedto.Loan
-import org.zaim.na.kartu.polus.ui.theme.baseBackground
-import org.zaim.na.kartu.polus.ui.theme.grey
-import org.zaim.na.kartu.polus.ui.theme.white
+import com.kredit.onlain.merca.ui.theme.baseText
+import com.kredit.onlain.merca.ui.theme.shadow
+import com.kredit.onlain.merca.ui.theme.white
+import org.zaim.na.kartu.polus.presentation.MainEvent
+import org.zaim.na.kartu.polus.presentation.MainEvent.OnChangeStatusApplication
 
 @Composable
 fun ItemLoan(
@@ -40,20 +43,24 @@ fun ItemLoan(
 ) {
     Column(
         modifier = modifier
+            .shadow(
+                elevation = 40.dp,
+                spotColor = shadow,
+                ambientColor = shadow
+            )
             .fillMaxWidth()
-            .border(width = 3.dp, color = grey, shape = RoundedCornerShape(15.dp))
-            .padding(end = 4.dp, bottom = 4.dp)
-            .clip(shape = RoundedCornerShape(16.dp))
-            .background(color = baseBackground)
-            .padding(15.dp)
+            //.border(width = 3.dp, color = grey, shape = RoundedCornerShape(15.dp))
+            .clip(shape = RoundedCornerShape(10.dp))
+            .background(color = white)
+            .padding(16.dp)
     ) {
         AsyncImage(
             modifier = modifier
                 .fillMaxWidth()
                 .clickable {
                     onEvent(
-                        MainEvent.OnChangeStatusApplication(
-                            StatusApplication.Offer(
+                        OnChangeStatusApplication(
+                            Offer(
                                 currentBaseState = baseState,
                                 ElementOffer(
                                     nameButton = loan.orderButtonText,
@@ -82,12 +89,12 @@ fun ItemLoan(
             contentScale = ContentScale.FillWidth,
             contentDescription = ""
         )
-        Spacer(modifier = modifier.height(13.dp))
+        Spacer(modifier = modifier.height(14.dp))
         Text(
-            color = white,
-            fontStyle = FontStyle(R.font.open_sans),
-            fontSize = 19.sp,
-            fontWeight = FontWeight(700),
+            color = baseText,
+            fontStyle = FontStyle(R.font.baloo2),
+            fontSize = 22.sp,
+            fontWeight = FontWeight(500),
             text = loan.name
         )
         /*Row(
@@ -106,26 +113,24 @@ fun ItemLoan(
                 rang = loan.score
             )
         }*/
-        Spacer(modifier = modifier.height(13.dp))
+        Spacer(modifier = modifier.height(14.dp))
         RowData(
-            title = stringResource(id = R.string.amount),
+            title = stringResource(id = string.amount),
             content = loan.summPrefix +" " + loan.summMin +" " + loan.summMid +" " + loan.summMax +" " + loan.summPostfix
         )
         if (loan.hidePercentFields == VALUE_ONE) {
-            Spacer(modifier = modifier.height(8.dp))
             RowData(
-                title = stringResource(id = R.string.bet),
+                title = stringResource(id = string.bet),
                 content = loan.percentPrefix +" " + loan.percent +" " + loan.percentPostfix
             )
         }
         if (loan.hideTermFields == VALUE_ONE) {
-            Spacer(modifier = modifier.height(8.dp))
             RowData(
-                title = stringResource(id = R.string.term),
+                title = stringResource(id = string.term),
                 content = loan.termPrefix +" "+ loan.termMin +" " + loan.termMid +" " + loan.termMax +" " + loan.termPostfix
             )
         }
-        Spacer(modifier = modifier.height(13.dp))
+        Spacer(modifier = modifier.height(14.dp))
         RowCard(
             showVisa = loan.showVisa,
             showMaster = loan.showMastercard,
@@ -134,7 +139,7 @@ fun ItemLoan(
             showQivi = loan.showQiwi,
             showCache = loan.showCash
         )
-        Spacer(modifier = modifier.height(13.dp))
+        Spacer(modifier = modifier.height(14.dp))
         RowButtons(
             titleOffer = loan.orderButtonText,
             onEvent = onEvent,

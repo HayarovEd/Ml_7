@@ -17,5 +17,5 @@ data class MainState(
     val affsub3Unswer: String = "",
     val affsub5Unswer: String = "",
     val dbData: BaseDto? = null,
-    val statusApplication: StatusApplication = StatusApplication.Loading/*Web(url = "https://ya.ru/", offerName = "Offer")*/,
+    val statusApplication: StatusApplication = StatusApplication.Splash/*Web(url = "https://ya.ru/", offerName = "Offer")*/,
 )

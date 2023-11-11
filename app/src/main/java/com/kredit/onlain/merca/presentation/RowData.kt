@@ -1,4 +1,4 @@
-package org.zaim.na.kartu.polus.presentation
+package com.kredit.onlain.merca.presentation
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -16,9 +16,9 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import org.zaim.na.kartu.polus.R
-import org.zaim.na.kartu.polus.ui.theme.baseBackground
-import org.zaim.na.kartu.polus.ui.theme.white
+import com.kredit.onlain.merca.R
+import com.kredit.onlain.merca.ui.theme.baseText
+import com.kredit.onlain.merca.ui.theme.white
 
 @Composable
 fun RowData(
@@ -29,23 +29,23 @@ fun RowData(
     Row (
         modifier = modifier
             .fillMaxWidth()
-            .background(color = baseBackground)
+            .background(color = white)
             .padding(vertical = 7.dp),
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically
     ) {
         Text(
-            color = white,
-            fontStyle = FontStyle(R.font.open_sans),
-            fontSize = 16.sp,
+            color = baseText,
+            fontStyle = FontStyle(R.font.baloo2),
+            fontSize = 18.sp,
             fontWeight = FontWeight(400),
             text = title,
             textAlign = TextAlign.Start
         )
         Text(
-            color = white,
-            fontStyle = FontStyle(R.font.open_sans),
-            fontSize = 16.sp,
+            color = baseText,
+            fontStyle = FontStyle(R.font.baloo2),
+            fontSize = 18.sp,
             fontWeight = FontWeight(600),
             text = content,
             textAlign = TextAlign.End
