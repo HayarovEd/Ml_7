@@ -1,4 +1,4 @@
-package org.zaim.na.kartu.polus.presentation
+package com.kredit.onlain.merca.presentation
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -29,13 +29,13 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import org.zaim.na.kartu.polus.R
+import com.kredit.onlain.merca.R
+import com.kredit.onlain.merca.ui.theme.baseBackground
+import com.kredit.onlain.merca.ui.theme.baseText
+import com.kredit.onlain.merca.ui.theme.blue
+import com.kredit.onlain.merca.ui.theme.white
+import org.zaim.na.kartu.polus.presentation.MainEvent
 import org.zaim.na.kartu.polus.presentation.MainEvent.Reconnect
-import org.zaim.na.kartu.polus.ui.theme.baseBackground
-import org.zaim.na.kartu.polus.ui.theme.darkText
-import org.zaim.na.kartu.polus.ui.theme.grey
-import org.zaim.na.kartu.polus.ui.theme.white
-import org.zaim.na.kartu.polus.ui.theme.yellow
 
 @Composable
 fun NoInternetScreen(
@@ -53,26 +53,26 @@ fun NoInternetScreen(
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Image(
-                modifier = modifier.size(200.dp),
+                modifier = modifier.size(90.dp),
                 painter = painterResource(
                 id = R.drawable.no_connect),
                 contentDescription = "")
-            Spacer(modifier = modifier.height(23.dp))
+            Spacer(modifier = modifier.height(45.dp))
             Text(
                 text = stringResource(id = R.string.not_connect),
-                fontSize = 18.sp,
-                fontWeight = FontWeight(700),
-                fontStyle = FontStyle(R.font.open_sans),
-                color = white,
+                fontSize = 24.sp,
+                fontWeight = FontWeight(500),
+                fontStyle = FontStyle(R.font.baloo2),
+                color = baseText,
                 textAlign = TextAlign.Center
             )
-            Spacer(modifier = modifier.height(24.dp))
+            Spacer(modifier = modifier.height(30.dp))
             Text(
                 text = stringResource(id = R.string.try_internet),
-                fontSize = 16.sp,
+                fontSize = 18.sp,
                 fontWeight = FontWeight(400),
-                fontStyle = FontStyle(R.font.open_sans),
-                color = grey,
+                fontStyle = FontStyle(R.font.baloo2),
+                color = baseText,
                 textAlign = TextAlign.Center
             )
         }
@@ -80,23 +80,21 @@ fun NoInternetScreen(
             modifier = modifier
                 .fillMaxWidth()
                 .align(alignment = Alignment.BottomCenter),
-            shape = RoundedCornerShape(10.dp),
+            shape = RoundedCornerShape(15.dp),
             contentPadding = PaddingValues(
-                vertical = 7.dp
+                vertical = 16.dp
             ),
             colors = ButtonDefaults.buttonColors(
-                containerColor = yellow,
-                contentColor = darkText,
-                disabledContainerColor = grey,
-                disabledContentColor = white
+                containerColor = blue,
+                contentColor = white,
             ),
             onClick = { onEvent(Reconnect) }
         ) {
             Text(
                 text = stringResource(id = R.string.reconnect),
                 style = TextStyle(
-                    fontSize = 18.sp,
-                    fontFamily = FontFamily(Font(R.font.open_sans)),
+                    fontSize = 26.sp,
+                    fontFamily = FontFamily(Font(R.font.baloo2)),
                     fontWeight = FontWeight(600),
                 )
             )

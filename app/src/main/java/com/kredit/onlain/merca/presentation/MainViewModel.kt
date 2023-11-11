@@ -33,7 +33,16 @@ import org.zaim.na.kartu.polus.domain.RepositoryServer
 import org.zaim.na.kartu.polus.domain.Service
 import org.zaim.na.kartu.polus.domain.SharedKepper
 import com.kredit.onlain.merca.domain.model.StatusApplication
+import com.kredit.onlain.merca.domain.model.StatusApplication.Connect
+import com.kredit.onlain.merca.domain.model.StatusApplication.Info
+import com.kredit.onlain.merca.domain.model.StatusApplication.Loading
+import com.kredit.onlain.merca.domain.model.StatusApplication.Mock
+import com.kredit.onlain.merca.domain.model.StatusApplication.NoConnect
+import com.kredit.onlain.merca.domain.model.StatusApplication.Offer
+import com.kredit.onlain.merca.domain.model.StatusApplication.Splash
+import com.kredit.onlain.merca.domain.model.StatusApplication.Web
 import com.kredit.onlain.merca.domain.model.basedto.BaseState
+import com.kredit.onlain.merca.domain.model.basedto.BaseState.Loans
 import org.zaim.na.kartu.polus.presentation.MainEvent
 import org.zaim.na.kartu.polus.presentation.MainEvent.OnChangeBaseState
 import org.zaim.na.kartu.polus.presentation.MainEvent.OnChangeStatusApplication
@@ -50,7 +59,7 @@ class MainViewModel @Inject constructor(
     private var _state = MutableStateFlow(MainState())
     val state = _state.asStateFlow()
 
-    private var _lastState = MutableStateFlow<StatusApplication>(StatusApplication.Loading)
+    private var _lastState = MutableStateFlow<StatusApplication>(StatusApplication.Splash)
     private val _myTracker = MutableStateFlow("")
     private val _appsFlayer = MutableStateFlow("")
     private val _link = MutableStateFlow("")
@@ -203,13 +212,13 @@ class MainViewModel @Inject constructor(
                             "${mainEvent.urlOffer}&aff_sub1=${_state.value.affsub1Unswer}&aff_sub2=${_state.value.affsub2Unswer}&aff_sub3=${_state.value.affsub3Unswer}&aff_sub5=${_state.value.affsub5Unswer}"
                         Log.d("ASDFGH", "url $completeUrl")
                         when (val lastState = _lastState.value) {
-                            is StatusApplication.Connect -> {
+                            is Connect -> {
                                 sendGoToOffer(
                                     url = completeUrl,
                                     parameter = OFFER_WALL
                                 )
                                 when (lastState.baseState) {
-                                    BaseState.Loans -> {
+                                    Loans -> {
                                         sendFromListOffers(
                                             url = completeUrl,
                                             parameter = LOANS
@@ -217,17 +226,18 @@ class MainViewModel @Inject constructor(
                                     }
                                 }
                             }
-                            is StatusApplication.Info -> {}
-                            StatusApplication.Loading -> {}
-                            StatusApplication.Mock -> {}
-                            StatusApplication.NoConnect -> {}
-                            is StatusApplication.Offer -> {
+                            is Info -> {}
+                            Loading -> {}
+                            Mock -> {}
+                            NoConnect -> {}
+                            is Offer -> {
                                 sendGoToOffer(
                                     url = completeUrl,
                                     parameter = MORE_DETAILS
                                 )
                             }
-                            is StatusApplication.Web -> { }
+                            is Web -> { }
+                            Splash -> {}
                         }
                         _state.value.copy(
                             statusApplication = StatusApplication.Web(

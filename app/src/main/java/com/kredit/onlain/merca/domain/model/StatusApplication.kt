@@ -1,10 +1,10 @@
 package com.kredit.onlain.merca.domain.model
 
-import com.kredit.onlain.merca.domain.model.ElementOffer
 import com.kredit.onlain.merca.domain.model.basedto.BaseState
 
 sealed class StatusApplication {
     object Loading: StatusApplication()
+    object Splash: StatusApplication()
     object Mock : StatusApplication()
     class Connect (val baseState: BaseState): StatusApplication()
 

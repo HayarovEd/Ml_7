@@ -24,7 +24,6 @@ import com.kredit.onlain.merca.data.LINK
 import com.kredit.onlain.merca.data.SHARED_APPSFLYER_INSTANCE_ID
 import com.kredit.onlain.merca.data.SHARED_DATA
 import com.kredit.onlain.merca.ui.theme.Ml_7Theme
-import org.zaim.na.kartu.polus.presentation.Sample
 
 
 @AndroidEntryPoint

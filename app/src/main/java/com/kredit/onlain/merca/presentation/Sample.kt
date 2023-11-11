@@ -1,4 +1,4 @@
-package org.zaim.na.kartu.polus.presentation
+package com.kredit.onlain.merca.presentation
 
 import android.os.Build
 import android.widget.Toast
@@ -10,10 +10,21 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.platform.LocalContext
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.kredit.onlain.merca.domain.model.StatusApplication
+import com.kredit.onlain.merca.domain.model.StatusApplication.Connect
+import com.kredit.onlain.merca.domain.model.StatusApplication.Info
+import com.kredit.onlain.merca.domain.model.StatusApplication.Loading
+import com.kredit.onlain.merca.domain.model.StatusApplication.Mock
+import com.kredit.onlain.merca.domain.model.StatusApplication.NoConnect
+import com.kredit.onlain.merca.domain.model.StatusApplication.Offer
+import com.kredit.onlain.merca.domain.model.StatusApplication.Splash
+import com.kredit.onlain.merca.domain.model.StatusApplication.Web
 import com.kredit.onlain.merca.domain.model.basedto.BaseState
-import com.kredit.onlain.merca.presentation.MainViewModel
-import org.zaim.na.kartu.polus.presentation.mock.BaseScreen
+import com.kredit.onlain.merca.domain.model.basedto.BaseState.Loans
+import org.zaim.na.kartu.polus.presentation.ConnectScreen
+import org.zaim.na.kartu.polus.presentation.MainEvent.OnChangeBaseState
+import org.zaim.na.kartu.polus.presentation.MainEvent.OnChangeStatusApplication
+import org.zaim.na.kartu.polus.presentation.OfferScreen
+import org.zaim.na.kartu.polus.presentation.WebViewScreen
 
 @RequiresApi(Build.VERSION_CODES.TIRAMISU)
 @Composable
@@ -40,25 +51,22 @@ fun Sample(
     val creditCardloanLazyState = rememberLazyListState()
     val debitCardLazyState = rememberLazyListState()
     val instalmentCardLazyState = rememberLazyListState()
-    val typeCard = if (!state.value.creditCards.isNullOrEmpty()) TypeCard.CardCredit
-    else if (!state.value.debitCards.isNullOrEmpty()) TypeCard.CardDebit else TypeCard.CardInstallment
     when (val currentState = state.value.statusApplication) {
-        is StatusApplication.Connect -> {
+        is Connect -> {
             ConnectScreen(
                 baseState = currentState.baseState,
                 db = state.value.dbData!!,
                 onClickCards = { onEvent(
-                    MainEvent.OnChangeBaseState(
-                        BaseState.Cards(
-                    typeCard = typeCard
-                ))
+                    OnChangeBaseState(
+                        Loans
+                    )
                 ) },
-                onClickCredits = { onEvent(MainEvent.OnChangeBaseState(BaseState.Credits)) },
-                onClickLoans = { onEvent(MainEvent.OnChangeBaseState(BaseState.Loans)) },
+                onClickCredits = { onEvent(OnChangeBaseState(BaseState.Credits)) },
+                onClickLoans = { onEvent(OnChangeBaseState(Loans)) },
                 onClickRules = {
                     onEvent(
-                        MainEvent.OnChangeStatusApplication(
-                            StatusApplication.Info(
+                        OnChangeStatusApplication(
+                            Info(
                                 currentBaseState = currentState.baseState,
                                 content = state.value.dbData!!.appConfig.privacyPolicyHtml
                             )
@@ -77,26 +85,26 @@ fun Sample(
             )
         }
 
-        StatusApplication.Loading -> {
+        Loading -> {
             LoadingScreen()
         }
 
-        is StatusApplication.Mock -> {
-            BaseScreen()
+        is Mock -> {
+            NoInternetScreen(onEvent = viewModel::onEvent)
         }
 
-        is StatusApplication.Info -> {
+        is Info -> {
         }
 
-        is StatusApplication.Offer -> {
+        is Offer -> {
             OfferScreen(
-                elementOffer = (state.value.statusApplication as StatusApplication.Offer).elementOffer,
-                baseState = (state.value.statusApplication as StatusApplication.Offer).currentBaseState,
+                elementOffer = (state.value.statusApplication as Offer).elementOffer,
+                baseState = (state.value.statusApplication as Offer).currentBaseState,
                 onEvent = viewModel::onEvent,
             )
         }
 
-        is StatusApplication.Web -> {
+        is Web -> {
             WebViewScreen(
                 url = currentState.url,
                 offerName = currentState.offerName,
@@ -104,9 +112,11 @@ fun Sample(
             )
         }
 
-        StatusApplication.NoConnect -> {
+        NoConnect -> {
             NoInternetScreen(onEvent = viewModel::onEvent)
         }
+
+        Splash -> TODO()
     }
 
 }
