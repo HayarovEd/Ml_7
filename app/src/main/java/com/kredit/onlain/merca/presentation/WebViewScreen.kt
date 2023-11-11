@@ -100,12 +100,12 @@ fun WebViewScreen(
                             onEvent(Reconnect)
                         }) {
                             Icon(
-                                imageVector = ImageVector.vectorResource(id = R.drawable.baseline_keyboard_arrow_left_20),
+                                imageVector = ImageVector.vectorResource(id = R.drawable.baseline_arrow_back_ios_20),
                                 tint = blue,
                                 contentDescription = ""
                             )
                         }
-                        Spacer(modifier = modifier.width(16.dp))
+                        Spacer(modifier = modifier.width(5.dp))
                         Text(
                             color = blue,
                             fontStyle = FontStyle(R.font.baloo2),
