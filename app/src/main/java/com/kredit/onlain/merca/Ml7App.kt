@@ -1,6 +1,9 @@
 package com.kredit.onlain.merca
 
 import android.app.Application
+import com.kredit.onlain.merca.data.APP_METRICA
+import com.kredit.onlain.merca.data.MY_TRACKER
+import com.kredit.onlain.merca.data.USER_X
 import com.my.tracker.MyTracker
 import com.yandex.metrica.YandexMetrica
 import com.yandex.metrica.YandexMetricaConfig
