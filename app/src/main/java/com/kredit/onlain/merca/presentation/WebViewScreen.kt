@@ -1,4 +1,4 @@
-package org.zaim.na.kartu.polus.presentation
+package com.kredit.onlain.merca.presentation
 
 import android.content.Context
 import android.content.Intent
@@ -48,11 +48,13 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.core.content.FileProvider
-import org.zaim.na.kartu.polus.R
-import org.zaim.na.kartu.polus.ui.theme.baseBackground
-import org.zaim.na.kartu.polus.ui.theme.white
+import com.kredit.onlain.merca.R
+import com.kredit.onlain.merca.ui.theme.baseBackground
+import com.kredit.onlain.merca.ui.theme.blue
 import java.io.File
 import java.io.IOException
+import org.zaim.na.kartu.polus.presentation.MainEvent
+import org.zaim.na.kartu.polus.presentation.MainEvent.Reconnect
 
 private var mFilePathCallback: ValueCallback<Array<Uri>>? = null
 private var imageOutputFileUri: Uri? = null
@@ -95,20 +97,20 @@ fun WebViewScreen(
                         verticalAlignment = Alignment.CenterVertically
                     ) {
                         IconButton(onClick = {
-                            onEvent(MainEvent.Reconnect)
+                            onEvent(Reconnect)
                         }) {
                             Icon(
-                                imageVector = ImageVector.vectorResource(id = R.drawable.baseline_arrow_back_30),
-                                tint = white,
+                                imageVector = ImageVector.vectorResource(id = R.drawable.baseline_keyboard_arrow_left_20),
+                                tint = blue,
                                 contentDescription = ""
                             )
                         }
                         Spacer(modifier = modifier.width(16.dp))
                         Text(
-                            color = white,
-                            fontStyle = FontStyle(R.font.open_sans),
-                            fontSize = 20.sp,
-                            fontWeight = FontWeight.Normal,
+                            color = blue,
+                            fontStyle = FontStyle(R.font.baloo2),
+                            fontSize = 22.sp,
+                            fontWeight = FontWeight(500),
                             text = offerName
                         )
                     }
@@ -185,7 +187,7 @@ fun WebViewScreen(
                         if (this@apply.canGoBack()) {
                             this@apply.goBack()
                         } else {
-                            onEvent(MainEvent.Reconnect)
+                            onEvent(Reconnect)
                         }
                     }
                     loadUrl(url)

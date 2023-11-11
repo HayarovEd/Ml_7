@@ -24,7 +24,6 @@ import org.zaim.na.kartu.polus.presentation.ConnectScreen
 import org.zaim.na.kartu.polus.presentation.MainEvent.OnChangeBaseState
 import org.zaim.na.kartu.polus.presentation.MainEvent.OnChangeStatusApplication
 import org.zaim.na.kartu.polus.presentation.OfferScreen
-import org.zaim.na.kartu.polus.presentation.WebViewScreen
 
 @RequiresApi(Build.VERSION_CODES.TIRAMISU)
 @Composable
@@ -116,7 +115,9 @@ fun Sample(
             NoInternetScreen(onEvent = viewModel::onEvent)
         }
 
-        Splash -> TODO()
+        Splash -> {
+            SplashScreen()
+        }
     }
 
 }
