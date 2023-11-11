@@ -1,3 +1,14 @@
 <resources>
-    <string name="app_name">Ml_7</string>
+    <string name="app_name">Loans Online - Fast Cash</string>
+
+    //No Internet
+    <string name="not_connect">Problems with connection</string>
+    <string name="try_internet">Check your internet connection and\ntry again</string>
+    <string name="reconnect">Try again</string>
+
+    //Other
+    <string name="loans">Loans</string>
+    <string name="amount">Amount:</string>
+    <string name="bet">Rate:</string>
+    <string name="term">Term:</string>
 </resources>
